@@ -44,4 +44,4 @@ if __name__ == '__main__':
 
     A = [2, 1, 8, 7, 3, 5, 6, 4]
     m = ungarded_partition(A, 0, len(A))
-    print(A, m)
+    print((A, m))

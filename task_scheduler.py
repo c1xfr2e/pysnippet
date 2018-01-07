@@ -1,6 +1,6 @@
 __author__ = 'zh'
 
-import Queue
+import queue
 import time
 import random
 
@@ -20,7 +20,7 @@ class Scheduler(object):
     task_map = {}
 
     def __init__(self):
-        self.ready_queue = Queue.Queue()
+        self.ready_queue = queue.Queue()
 
     def NewTask(self, target):
         tid = Scheduler.task_id
@@ -30,7 +30,7 @@ class Scheduler(object):
         self.ready_queue.put(task)
 
     def Exit(self, task):
-        print 'task %d exited' % task.tid
+        print('task %d exited' % task.tid)
         del self.task_map[task.tid]
 
     def Schedule(self, task):
@@ -69,20 +69,21 @@ class GetTaskID(SystemCall):
 
 def task_foo():
     for i in range(0, 5):
-        print 'foo run'
-        time.sleep(random.uniform(0, 2))
+        print('foo run')
+        time.sleep(random.uniform(3, 5))
         yield random.randint(0, 10)
 
 
 def task_bar():
     while True:
+        print('task_bar before yield')
         tid = yield GetTaskID()
-        print 'bar run, task id: ', tid
+        print('bar run, task id: ', tid)
         time.sleep(1)
 
 
 sched = Scheduler()
-sched.NewTask(task_foo())
+# sched.NewTask(task_foo())
 sched.NewTask(task_bar())
 
 sched.MainLoop()

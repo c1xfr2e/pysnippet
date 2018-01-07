@@ -14,28 +14,28 @@ class Decorator(object):
 
 @Decorator
 def just_a_name():
-    print 'where does this line of code go?'
+    print('where does this line of code go?')
 
-print just_a_name.__dict__
+print(just_a_name.__dict__)
 
 
 @just_a_name.another
 def name_again():
-    print 'wtf'
+    print('wtf')
 
-print name_again.__dict__
+print(name_again.__dict__)
 
 
 def decorator_func(wrapped):
-    print 'decorating: ', wrapped.__name__
+    print('decorating: ', wrapped.__name__)
 
     wrapped.bar = 'bar'
 
     @functools.wraps(wrapped)
     def wrapper(*args, **kwargs):
-        print 'before call wrapped: ', wrapped.__name__
+        print('before call wrapped: ', wrapped.__name__)
         result = wrapped(*args, **kwargs)
-        print 'after call wrapped: ', wrapped.__name__
+        print('after call wrapped: ', wrapped.__name__)
         return result
 
     return wrapper
@@ -45,9 +45,9 @@ def decorator_func(wrapped):
 @decorator_func
 def func(a, b):
     """func doc"""
-    print a + b
+    print(a + b)
 
-print func.__name__
-print func.__dict__
+print(func.__name__)
+print(func.__dict__)
 func('x', 'y')
 

@@ -1,6 +1,6 @@
 
 def fun(self):
-    print 'fun()', self.name
+    print('fun()', self.name)
 
 
 Foo = type(
@@ -11,15 +11,15 @@ Foo = type(
         'fun': fun
     }
 )
-print Foo
-print Foo.__dict__
+print(Foo)
+print(Foo.__dict__)
 
 
 foo_1 = Foo()
-print foo_1.__dict__
+print(foo_1.__dict__)
 
-print Foo.fun
-print foo_1.fun
+print(Foo.fun)
+print(foo_1.fun)
 
 foo_1.fun()
 
@@ -30,18 +30,18 @@ class Meta(type):
 
     def __init__(cls, *args, **kwargs):
         type.__init__(cls, *args, **kwargs)
-        print 'Meta::__init__', cls.__name__
+        print('Meta::__init__', cls.__name__)
         cls._unbound_fields = {}
 
     def __call__(cls, *args, **kwargs):
-        print 'Meta::__call__', cls.__name__
+        print('Meta::__call__', cls.__name__)
         return type.__call__(cls, *args, **kwargs)
 
     def function_in_meta(cls):
         pass
 
 
-print 'Meta: ', Meta, type(Meta)
+print('Meta: ', Meta, type(Meta))
 
 meta_i_1 = Meta('Meta_1', (object,), {})
 meta_i_2 = Meta('Meta_2', (object,), {})
@@ -58,21 +58,21 @@ class Bar(meta_i_1):
         super(Bar, self).__init__(*args, **kwargs)
 
     def __call__(self, *args, **kwargs):
-        print 'Bar::__call__', Bar.a, Bar.x
+        print('Bar::__call__', Bar.a, Bar.x)
 
 
 class Baz(Meta('Meta', (object,), {})):
     def __init__(self):
-        print 'Baz::__init__'
+        print('Baz::__init__')
         super(Baz, self).__init__()
 
-print issubclass(int, int)
-print issubclass(Foo, Foo)
-print issubclass(Bar, Bar)
-print isinstance(Bar, Bar)
+print(issubclass(int, int))
+print(issubclass(Foo, Foo))
+print(issubclass(Bar, Bar))
+print(isinstance(Bar, Bar))
 
 bar = Bar()
-print bar
+print(bar)
 bar()
 
 # Can not find attribute in meta class.
@@ -84,10 +84,10 @@ class C(object):
 
 c = object.__new__(C)
 c.__init__('c1')
-print c.a
+print(c.a)
 
 c2 = type.__call__(C, 'c2')
-print c2.a
+print(c2.a)
 
 #####################################################################
 
@@ -104,7 +104,7 @@ class MyType(type):
 
         # Go over attributes and see if they should be renamed.
         newattrs = {}
-        for attrname, attrvalue in attrs.iteritems():
+        for attrname, attrvalue in attrs.items():
             if getattr(attrvalue, 'is_hook', 0):
                 newattrs['__%s__' % attrname] = attrvalue
             else:
@@ -116,7 +116,7 @@ class MyType(type):
         super(MyType, self).__init__(name, bases, attrs)
 
         # classregistry.register(self, self.interfaces)
-        print "Would register class %s now." % self
+        print("Would register class %s now." % self)
 
     def __add__(self, other):
         class AutoClass(self, other):
@@ -127,11 +127,9 @@ class MyType(type):
 
     def unregister(self):
         # classregistry.unregister(self)
-        print "Would unregister class %s now." % self
+        print("Would unregister class %s now." % self)
 
-class MyObject:
-    __metaclass__ = MyType
-
+class MyObject(metaclass=MyType):
     def f(self):
         pass
 
@@ -140,7 +138,7 @@ class NoneSample(MyObject):
     pass
 
 # Will print "NoneType None"
-print type(NoneSample), repr(NoneSample)
+print(type(NoneSample), repr(NoneSample))
 
 class Example(MyObject):
     def __init__(self, value):
@@ -156,12 +154,12 @@ inst = Example(10)
 # Will fail with an AttributeError
 #inst.unregister()
 
-print inst + inst
+print(inst + inst)
 class Sibling(MyObject):
     pass
 
 ExampleSibling = Example + Sibling
 # ExampleSibling is now a subclass of both Example and Sibling (with no
 # content of its own) although it will believe it's called 'AutoClass'
-print ExampleSibling
-print ExampleSibling.__mro__
+print(ExampleSibling)
+print(ExampleSibling.__mro__)

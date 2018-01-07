@@ -27,8 +27,8 @@ def partition(L, p, r):
 
 A = [3,34,1,15,21,6,11,8,12]
 q = partition(A, 0, len(A) - 1)
-print A
-print q
+print(A)
+print(q)
 
 
 S = ['A', 'C', 'B', 'A', 'A', 'C', 'B', 'C', 'C', 'C', 'B']
@@ -51,4 +51,4 @@ def move3(S, M):
             i += 1
 
 move3(S, M)
-print S
+print(S)

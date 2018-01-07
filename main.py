@@ -7,7 +7,7 @@ m.fun()
 
 import pkg_foo
 
-print dir(pkg_foo)
+print(dir(pkg_foo))
 
 pkg_foo.fun()
 

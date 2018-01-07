@@ -14,7 +14,7 @@ class NonDataDesc(object):
 
 class DataDesc(object):
     def __get__(self, instance, owner):
-        print self, instance, owner
+        print(self, instance, owner)
         pass
 
     def __set__(self, instance, value):
@@ -96,8 +96,8 @@ class B(object):
         return self._r
 
 b = B('kkk')
-print b.k
-print b.r
+print(b.k)
+print(b.r)
 # b.r = 'r'
 # del b.r
 
@@ -110,24 +110,24 @@ class C(B):
 
     @my_staticmethod
     def f_static(foo, bar):
-        print foo, bar
+        print(foo, bar)
 
     @my_classmethod
     def f_class(cls, foo):
-        print cls, foo
+        print(cls, foo)
 
 
 c = C()
-print c.__dict__
-print c.x
-print c.k
-print c.y
+print(c.__dict__)
+print(c.x)
+print(c.k)
+print(c.y)
 
 c.f_static('123', 'abc')
 C.f_static('snake', 'egg')
 
 def f(self, foo):
-    print self, foo
+    print(self, foo)
 
 C.f_static = f
 c.f_static('H')

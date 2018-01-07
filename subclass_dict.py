@@ -9,8 +9,8 @@ class DefaultDict(dict):
 
 d = DefaultDict()
 d['florp'] = 127
-print d['foo'], d['bar']
+print(d['foo'], d['bar'])
 
 dftd = defaultdict(lambda: 0)
-print dftd.get('foo')
-print dftd['bar']
+print(dftd.get('foo'))
+print(dftd['bar'])

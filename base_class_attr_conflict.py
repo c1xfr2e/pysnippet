@@ -10,6 +10,6 @@ class B(object):
 class C(A, B):
     pass
 
-print C.__bases__[1].attr
+print(C.__bases__[1].attr)
 
 

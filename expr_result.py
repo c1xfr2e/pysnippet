@@ -5,9 +5,9 @@ def do():
     b = 2
     c = 0
     d = c or b or a
-    print d
+    print(d)
     d = a or b or c
-    print d
+    print(d)
 
 import sys
-print sys.path
+print(sys.path)

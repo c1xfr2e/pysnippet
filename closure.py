@@ -3,7 +3,7 @@ __author__ = 'zh'
 
 def make(L):
     def inner():
-        print L
+        print(L)
     return inner
 
 
