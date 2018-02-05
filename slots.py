@@ -13,10 +13,10 @@ print(f._Foo__B)
 
 
 class C(object):
-    __slots__ = ('__foo', '__bar__')
+    __slots__ = ('__foo__', '__bar__')
 
     def __init__(self, x):
-        object.__setattr__(self, '_C__foo', x)
+        object.__setattr__(self, '__foo__', x)
         object.__setattr__(self, '__bar__', 'class_C')
 
     def fun(self):
@@ -26,7 +26,7 @@ class C(object):
 print(C.__dict__)
 
 c = C('hello')
-print(c._C__foo)
+print(c.__foo__)
 print(c.__bar__)
 
-c.a = 'a'
+c.aaa = 'aaa'

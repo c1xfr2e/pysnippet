@@ -2,52 +2,62 @@
 import functools
 
 
-class Decorator(object):
-    def __init__(self, foo=None, bar=None):
-        self.foo = foo
-        self.bar = bar
+class MyDecorator(object):
+    FUNC = []
 
-    def another(self, fun):
+    def __init__(self, func, msg="SECOND"):
+        self.FUNC.append(func)
+        self.msg = msg
+
+    def another(self, func):
         this_class = type(self)
-        return this_class(self.foo, fun)
+        return this_class(func, msg="HELLO")
+
+    def __call__(self, *args, **kwargs):
+        for f in self.FUNC:
+            f(self.msg)
 
 
-@Decorator
-def just_a_name():
-    print('where does this line of code go?')
+# Decorate a function with a class objcet.
+@MyDecorator
+def just_a_name(*args, **kwargs):
+    print('just_a_name: ', args)
 
-print(just_a_name.__dict__)
+
+just_a_name()
 
 
+# Decorate a function with a method.
 @just_a_name.another
-def name_again():
-    print('wtf')
-
-print(name_again.__dict__)
+def another_name(*args, **kwargs):
+    print('another_name: ', args)
 
 
-def decorator_func(wrapped):
+another_name()
+
+
+def decorator_func(func):
+    wrapped = func
+
     print('decorating: ', wrapped.__name__)
-
+    wrapped.name = 'func'
     wrapped.bar = 'bar'
 
     @functools.wraps(wrapped)
-    def wrapper(*args, **kwargs):
-        print('before call wrapped: ', wrapped.__name__)
-        result = wrapped(*args, **kwargs)
-        print('after call wrapped: ', wrapped.__name__)
-        return result
+    def inner_wrapper(*args, **kwargs):
+        return wrapped(*args, **kwargs)
 
-    return wrapper
+    return inner_wrapper
     # return functools.update_wrapper(wrapper, wrapped)
 
 
 @decorator_func
-def func(a, b):
+def func_foo(a, b):
     """func doc"""
     print(a + b)
 
-print(func.__name__)
-print(func.__dict__)
-func('x', 'y')
+
+print(func_foo.__name__)
+print(func_foo.__dict__)
+func_foo('x', 'y')
 

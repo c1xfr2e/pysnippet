@@ -1,6 +1,7 @@
 
 import numpy
 
+
 def sort(A, left, right):
     if left >= right:
         return

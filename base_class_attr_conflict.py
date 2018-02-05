@@ -10,6 +10,10 @@ class B(object):
 class C(A, B):
     pass
 
+print(C.attr)
+C.attr = 'Now'
+
+print(C.__bases__[0].attr)
 print(C.__bases__[1].attr)
 
 

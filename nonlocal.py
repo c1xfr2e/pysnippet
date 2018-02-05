@@ -1,13 +1,18 @@
-def tester(start):
+import datetime
+
+def outer(start):
     state = start
-    def nested(label):
+    def inner(label):
+        nonlocal state
         print((label, state))
         state += 1
-    return nested
+    return inner
 
-F = tester(0)
+F = outer(0)
 F('spam')
 F('egg')
 
-G = tester(1)
+G = outer(100)
 G('ham')
+
+dt = datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S")
