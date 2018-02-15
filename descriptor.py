@@ -79,24 +79,39 @@ def my_classmethod(func):
 
 
 class B(object):
-    def __init__(self, k):
+    def __init__(self, k=None):
         self._k = k
         self._r = '_r'
 
-    x = NonDataDesc()
-    y = DataDesc()
+    non_data_desc = NonDataDesc()
+    data_desc = DataDesc()
 
     def getk(self):
         return self._k
 
-    k = Property(getk)
+    def setk(self, value):
+        self._k = value    
+
+    k = Property(getk, setk)
 
     @property
     def r(self):
         return self._r
 
+
 b = B('kkk')
+print(B.__dict__)
+# override non-data descriptor
+print(b.non_data_desc)
+b.non_data_desc = "non_data_desc"
+print(b.non_data_desc)
+# override data descriptor
+print(b.data_desc)
+b.data_desc = "data desc"
+print(b.data_desc)
+
 print(b.k)
+b.k = 'set k'
 print(b.r)
 # b.r = 'r'
 # del b.r
