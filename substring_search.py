@@ -99,4 +99,5 @@ def z_advanced(s):
 
                 lt = k
                 rt = i - 1
-        return Z
+
+    return Z
