@@ -82,15 +82,14 @@ class Eventloop(object):
 
 
 class SystemCall(object):
-    task = None     # which task fired this system call
-    loop = None    # the scheduler
+    task = None  # which task fired this system call
+    loop = None  # the scheduler
 
     def handle(self):
         pass
 
 
 class GetTaskID(SystemCall):
-
     def handle(self):
         self.task.sendval = self.task.tid
         self.loop.schedule(self.task)
